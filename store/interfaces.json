@@ -1,0 +1,10 @@
+{
+    "main-menu":{
+        "component":"index",
+        "composition": "children"
+    },
+    "main-menu-item":{
+        "component":"MenuItem",
+        "composition": "children"
+    }
+}
