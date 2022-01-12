@@ -31,6 +31,8 @@
     background-color: white;    
       position: absolute;
       left: 0;
+      box-sizing: border-box;
+      box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.2); 
 }
 .menuTitle{
     padding: 20px;    
