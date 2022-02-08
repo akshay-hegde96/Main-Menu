@@ -30,7 +30,7 @@ const MainMenu = (props) => {
     blockPropArr &&
     blockPropArr.map((menu) => {
       return (
-        <div className={handles.menuTitleContainer}>
+        <div key={menu.menuTitle} className={handles.menuTitleContainer}>
           <a href={menu.menuLink}>
             <div
               onMouseOver={() => showSubItems(menu.menuid)}
@@ -50,7 +50,10 @@ const MainMenu = (props) => {
       .map((subitem) => {
         return subitem.submenu.map((each) => {
           return (
-            <div className={handles.submenuL1Container}>
+            <div
+              key={each.submenuL1Title}
+              className={handles.submenuL1Container}
+            >
               <a href={each.submenuL1TitleLink}>
                 <div className={handles.submenuL1Title}>
                   {each.submenuL1Title}
@@ -58,7 +61,7 @@ const MainMenu = (props) => {
               </a>
               {each.submenuL1Content.map((subMenu) => {
                 return (
-                  <a href={subMenu.link}>
+                  <a key={subMenu.name} href={subMenu.link}>
                     <div className={handles.submenuL1Content}>
                       {subMenu.name}
                     </div>
