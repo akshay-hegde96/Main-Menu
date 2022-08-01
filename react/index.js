@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import React from 'react'
 import styles from './index.css'
@@ -12,16 +13,16 @@ const CSS_HANDLES = [
   'mainContainer',
   'menuContainer',
   'subMenuContainer',
+  'menuContainerArrow'
 ]
 const MainMenu = (props) => {
   const handles = useCssHandles(CSS_HANDLES)
   const [subItems, setSubItems] = useState(null)
   console.log({ ...props })
-
   const menuArr = [...props.children]
-  console.log(menuArr)
+   console.log("menuArr",menuArr)
   const blockPropArr = menuArr.map((mitem) => mitem.props.blockProps)
-  console.log(blockPropArr)
+   console.log(blockPropArr)
   let display
   display =
     blockPropArr &&
@@ -45,28 +46,38 @@ const MainMenu = (props) => {
     const subitemArr = blockPropArr
       .filter((eachele) => eachele.menuid == menuid)
       .map((subitem) => {
-        return subitem.submenu.map((each) => {
-          return (
-            <div
-              key={each.submenuL1Title}
-              className={handles.submenuL1Container}
-            >
-              <a href={each.submenuL1TitleLink}>
-                <div className={handles.submenuL1Title}>
-                  {each.submenuL1Title}
-                </div>
-              </a>
-              {each.submenuL1Content.map((subMenu) => {
-                return (
-                  <a key={subMenu.name} href={subMenu.link}>
-                    <div className={handles.submenuL1Content}>
-                      {subMenu.name}
-                    </div>
-                  </a>
-                )
-              })}
-            </div>
-          )
+        return subitem.submenu.map((each,k) => {
+ return (
+<div
+ key={k}
+ className={handles.submenuL1Container}
+>
+  <span className={handles.menuContainerArrow}></span>
+{
+ each.map((m,i) => {
+ return(
+<span>
+ <a href={each[i].submenuL1TitleLink}>
+<div className={handles.submenuL1Title}>
+ {each[i].submenuL1Title}
+</div>
+ </a>
+ {each[i].submenuL1Content.map((subMenu) => {
+  {console.log('subMenu', subMenu)}
+return (
+ <a key={subMenu.name} href={subMenu.link}>
+<div className={handles.submenuL1Content}>
+ {subMenu.name}
+</div>
+ </a>
+)
+ })}
+ </span>
+ )
+})
+}
+</div>
+ )
         })
       })
 
@@ -75,7 +86,7 @@ const MainMenu = (props) => {
 
   return (
     <div
-      onMouseLeave={() => setSubItems(null)}
+       onMouseLeave={() => setSubItems(null)}
       className={handles.mainContainer}
     >
       <div className={handles.menuContainer}> {display}</div>
